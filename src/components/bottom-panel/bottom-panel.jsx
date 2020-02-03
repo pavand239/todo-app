@@ -13,27 +13,27 @@ export default class BottomPanel extends React.Component {
             })
         }
     }
+    onSubmit=(e)=>{
+        e.preventDefault();
+        this.props.handlerOnAddItem(this.state.inputValue);
+        this.setState({
+            inputValue:''
+        });
+    }
     render() {
         let {inputValue} = this.state;
         return (
-            <div className='d-flex bottom-panel'>
+            <form className='d-flex bottom-panel'
+                  onSubmit={this.onSubmit} >
                 <input 
                     className='bottom-panel-input form-control' 
                     type='text' onChange={this.onInputChange} 
                     value={inputValue} 
                     placeholder='Add new item...' />
-                <button 
-                    className="btn btn-primary"
-                    onClick={()=>{
-                        this.props.handlerOnAddItem(inputValue);
-                        this.setState({
-                            inputValue:''
-                        })
-                    }}
-                >
+                <button className="btn btn-primary">
                     Add
                 </button>
-            </div>
+            </form>
         )
     }
 }
